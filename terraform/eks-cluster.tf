@@ -32,6 +32,8 @@ module "eks" {
     }
   }
 
+  cluster_encryption_config = []
+
   tags = merge(
     var.default_tags,
     {
