@@ -12,6 +12,10 @@ on:
     paths:
       - terraform/**
 
+env:
+  TF_LOG: INFO
+  BUCKET_TF_STATE: ${{ vars.BUCKET_TF_STATE}}
+
 jobs:
   terraform-apply:
     runs-on: ubuntu-latest
@@ -36,7 +40,10 @@ jobs:
         uses: hashicorp/setup-terraform@v3
 
       - name: Terraform Init
-        run: terraform init
+        run: terraform init -backend-config="bucket=$BUCKET_TF_STATE"
+
+      - name: Terraform Plan
+        run: terraform plan -var="iam_role_arn=${{ secrets.IAM_ROLE_ARN }}" -out=tfplan
 
       - name: Terraform Apply
-        run: terraform apply -var="iam_role_arn=${{ secrets.IAM_ROLE_ARN }}" -auto-approve
+        run: terraform apply -var="iam_role_arn=${{ secrets.IAM_ROLE_ARN }}" -auto-approve tfplan

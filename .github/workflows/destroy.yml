@@ -3,6 +3,10 @@ name: Terraform Destroy
 on:
   workflow_dispatch:
 
+env:
+  TF_LOG: INFO
+  BUCKET_TF_STATE: ${{ vars.BUCKET_TF_STATE}}
+
 jobs:
   terraform-destroy:
     runs-on: ubuntu-latest
@@ -27,7 +31,10 @@ jobs:
         uses: hashicorp/setup-terraform@v3
 
       - name: Terraform Init
-        run: terraform init
+        run: terraform init -backend-config="bucket=$BUCKET_TF_STATE"
+
+      - name: Terraform Plan
+        run: terraform plan -out=tfplan
 
       - name: Terraform Destroy
-        run: terraform destroy -var="iam_role_arn=${{ secrets.IAM_ROLE_ARN }}" -auto-approve
+        run: terraform destroy -auto-approve tfplan
