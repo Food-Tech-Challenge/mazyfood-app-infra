@@ -14,9 +14,12 @@ module "vpc" {
   single_nat_gateway   = true
   enable_dns_hostnames = true
 
-  tags = {
-    Name = "mazy-food-vpc"
-  }
+  tags = merge(
+    var.default_tags,
+    {
+      Name = "${var.project}-vpc"
+    }
+  )
 
   public_subnet_tags = {
     "kubernetes.io/cluster/${local.cluster_name}" = "shared"
