@@ -22,4 +22,8 @@ terraform {
   }
 
   required_version = "~> 1.10"
+
+  backend "s3" {
+    key = "mazyfood-app-infra/terraform.tfstate"
+  }
 }

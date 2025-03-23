@@ -14,8 +14,8 @@ Certifique-se de ter as seguintes ferramentas instaladas:
 1. **Clone o Repositório**
 
 ```bash
-git clone <URL_DO_REPOSITORIO>
-cd <NOME_DO_REPOSITORIO>/terraform
+git clone git@github.com:Food-Tech-Challenge/mazy-food-app-infra.git
+cd mazy-food-app-infra/
 ```
 
 2. **Configure suas credenciais AWS**
