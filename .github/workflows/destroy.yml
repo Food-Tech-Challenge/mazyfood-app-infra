@@ -36,13 +36,13 @@ jobs:
       - name: Terraform Format
         id: fmt
         run: terraform fmt -check
-     
+
       - name: Terraform Validate
         id: validate
         run: terraform validate
-  
-      - name: Terraform Plan
-        run: terraform plan -out=tfplan
 
-      - name: Terraform Destroy
-        run: terraform destroy -auto-approve tfplan
+      - name: Terraform Plan Destroy
+        run: terraform plan -destroy -out=tfplan
+
+      - name: Terraform Apply Destroy
+        run: terraform apply -auto-approve tfplan
