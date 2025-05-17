@@ -12,12 +12,12 @@ module "eks" {
   create_iam_role = false
   enable_irsa     = false
 
-  iam_role_arn = var.iam_role_arn
+  iam_role_arn = data.aws_iam_role.lab_role.arn
 
   eks_managed_node_group_defaults = {
     ami_type        = "AL2_x86_64"
     create_iam_role = false
-    iam_role_arn    = var.iam_role_arn
+    iam_role_arn    = data.aws_iam_role.lab_role.arn
   }
 
   eks_managed_node_groups = {
