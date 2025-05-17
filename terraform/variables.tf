@@ -16,7 +16,3 @@ variable "project" {
   type    = string
   default = "mazyfood"
 }
-
-variable "iam_role_arn" {
-  type = string
-}

@@ -52,7 +52,7 @@ jobs:
         run: terraform validate
   
       - name: Terraform Plan
-        run: terraform plan -var="iam_role_arn=${{ secrets.IAM_ROLE_ARN }}" -out=tfplan
+        run: terraform plan -out=tfplan
 
       - name: Terraform Apply
-        run: terraform apply -var="iam_role_arn=${{ secrets.IAM_ROLE_ARN }}" -auto-approve tfplan
+        run: terraform apply -auto-approve tfplan
